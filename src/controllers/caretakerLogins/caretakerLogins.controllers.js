@@ -12,7 +12,8 @@ async function loginCaretaker(req, res) {
       email,
     });
 
-    if (!caretakerCreds) res.status(400).json(errorMessages.invalidLogin);
+    if (!caretakerCreds)
+      return res.status(400).json(errorMessages.invalidLogin);
 
     const passwordVerified = await checkPassword(
       password,
