@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const caretakersRouter = require('./routers/caretakers/caretaker.routes');
+const caretakerLoginsRouter = require('./routers/caretakerLogins/caretakerLogins.routes');
 
 const app = express();
 
@@ -12,6 +14,7 @@ app.use(
 );
 
 // Routers
-app.get('/', (req, res) => res.send('Cognicare'));
+app.use('/caretakers/login', caretakerLoginsRouter);
+app.use('/caretakers', caretakersRouter);
 
 module.exports = app;
