@@ -1,12 +1,12 @@
-const { verifyAuthToken } = require("../utils/authentication");
+const { verifyAuthToken } = require('../utils/authentication');
 
 async function authentication(req, res, next) {
   try {
-    const token = req.headers["x-auth-token"];
+    const token = req.headers['x-auth-token'];
 
     const verified = verifyAuthToken(token);
 
-    if (!verified) return res.status(401).json("Authentication required");
+    if (!verified) return res.status(401).json('Authentication required');
 
     const { userId } = verified;
 

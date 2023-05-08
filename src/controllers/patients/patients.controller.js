@@ -1,7 +1,7 @@
-const caretakers = require("../../models/caretakers/caretakers.model");
-const patients = require("../../models/patients/patients.model");
-const { getAuthToken } = require("../../utils/authentication");
-const errorMessages = require("../../utils/error-messages");
+const caretakers = require('../../models/caretakers/caretakers.model');
+const patients = require('../../models/patients/patients.model');
+const { getAuthToken } = require('../../utils/authentication');
+const errorMessages = require('../../utils/error-messages');
 
 async function getAllPatientByCaretaker(req, res) {
   try {
@@ -10,7 +10,7 @@ async function getAllPatientByCaretaker(req, res) {
     const caretaker = await caretakers.findById(authUser);
 
     if (!caretaker)
-      return res.status(404).json("caretaker " + errorMessages.notFound);
+      return res.status(404).json('caretaker ' + errorMessages.notFound);
 
     const patientsOfCaretaker = await patients.find({
       caretaker: { _id: authUser },
@@ -62,7 +62,7 @@ async function createNewPatient(req, res) {
     const caretaker = await caretakers.findById(authUser);
 
     if (!caretaker)
-      return res.status(404).json("catetaker" + errorMessages.notFound);
+      return res.status(404).json('catetaker' + errorMessages.notFound);
 
     const newPaitent = await patients.create({
       caretaker: authUser,
