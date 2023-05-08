@@ -1,6 +1,11 @@
 const { Schema, model } = require('mongoose');
 
 const caretakerLoginSchema = new Schema({
+  caretakerId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Caretaker',
+    required: true,
+  },
   email: {
     type: String,
     min: 3,

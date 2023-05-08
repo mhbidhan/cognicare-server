@@ -31,17 +31,18 @@ async function createNewCaretaker(req, res) {
 
     const encryptedPassword = await encryptPassword(password);
 
-    await caretakerLogins.create({
-      email,
-      password: encryptedPassword,
-    });
-
     const caretaker = await caretakers.create({
       name,
       email,
       phone,
       imgUrl,
       patients: [],
+    });
+
+    await caretakerLogins.create({
+      caretakerId: caretaker._id,
+      email,
+      password: encryptedPassword,
     });
 
     return res.status(200).json(caretaker);

@@ -1,5 +1,6 @@
 const caretakerLogins = require('../../models/caretakerLogins/caretakerLogins.model');
-const { verifyAuthToken, getAuthToken } = require('../../utils/authentication');
+const caretakers = require('../../models/caretakers/caretakers.model');
+const { getAuthToken } = require('../../utils/authentication');
 const errorMessages = require('../../utils/error-messages');
 const { checkPassword } = require('../../utils/password');
 
@@ -7,16 +8,22 @@ async function loginCaretaker(req, res) {
   try {
     const { email, password } = req.body;
 
-    const caretaker = await caretakerLogins.findOne({
+    const caretakerCreds = await caretakerLogins.findOne({
       email,
     });
 
-    if (!caretaker) res.status(400).json(errorMessages.invalidLogin);
+    if (!caretakerCreds)
+      return res.status(400).json(errorMessages.invalidLogin);
 
-    const passwordVerified = await checkPassword(password, caretaker.password);
+    const passwordVerified = await checkPassword(
+      password,
+      caretakerCreds.password
+    );
 
     if (!passwordVerified)
       return res.status(400).json(errorMessages.invalidLogin);
+
+    const caretaker = await caretakers.findById(caretakerCreds.caretakerId);
 
     const token = getAuthToken(caretaker._id);
 

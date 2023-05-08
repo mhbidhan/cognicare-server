@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const patientSchema = new Schema({
   caretaker: {
-    tpye: Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Caretaker',
     required: true,
   },
@@ -28,7 +28,6 @@ const patientSchema = new Schema({
     type: String,
     min: 3,
     max: 255,
-    required: true,
   },
   emergencyContact: {
     _id: false,
