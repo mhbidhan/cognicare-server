@@ -29,7 +29,7 @@ async function getOwnData(req, res) {
 
     const patient = await patients.findById(authUser);
 
-    if (!patient) res.status(404).json(patient);
+    if (!patient) return res.status(404).json(patient);
 
     res.status(200).json(patient);
   } catch (error) {
