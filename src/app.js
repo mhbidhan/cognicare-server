@@ -4,6 +4,8 @@ const caretakersRouter = require('./routers/caretakers/caretaker.routes');
 const caretakerLoginsRouter = require('./routers/caretakerLogins/caretakerLogins.routes');
 const patientRouter = require('./routers/patients/patients.routes');
 const okayaRouter = require('./routers/okaya/okaya.routes');
+const routineElementsRouter = require('./routers/routine-elements/routine-elements.routes');
+const patientRoutinesRouter = require('./routers/patient-routine/patient-routine.routes');
 
 const app = express();
 
@@ -19,6 +21,8 @@ app.use(
 app.use('/caretakers/login', caretakerLoginsRouter);
 app.use('/caretakers', caretakersRouter);
 app.use('/patients', patientRouter);
+app.use('/patientRoutine', patientRoutinesRouter);
+app.use('/routineElement', routineElementsRouter);
 app.use('/okaya', okayaRouter);
 
 module.exports = app;
