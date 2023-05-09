@@ -78,6 +78,10 @@ async function createNewPatient(req, res) {
 
     await newPaitent.save();
 
+    caretaker.patients.push(newPaitent._id);
+
+    caretaker.save();
+
     res.status(201).json(newPaitent);
   } catch (error) {
     console.log(error);

@@ -3,10 +3,12 @@ const {
   createNewPatientRoutine,
   getAllRoutineForPatient,
 } = require('../../controllers/patient-routine/patient-routine.controller');
+const patientAuthentication = require('../../middlewares/patient.middleware');
+const authentication = require('../../middlewares/authentication.middleware');
 
 const patientRoutinesRouter = express.Router();
 
-patientRoutinesRouter.get('/', getAllRoutineForPatient);
-patientRoutinesRouter.post('/', createNewPatientRoutine);
+patientRoutinesRouter.get('/', patientAuthentication, getAllRoutineForPatient);
+patientRoutinesRouter.post('/', authentication, createNewPatientRoutine);
 
 module.exports = patientRoutinesRouter;
