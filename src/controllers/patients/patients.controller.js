@@ -42,11 +42,11 @@ async function getPatientById(req, res) {
   try {
     const { id } = req.params;
 
-    const patient = patients.findById(id);
+    const patient = await patients.findById(id);
 
-    if (!patient) res.status(404).json(patient);
+    if (!patient) return res.status(404).json(patient);
 
-    res.status(200).json(paitent);
+    res.status(200).json(patient);
   } catch (error) {
     console.log(error);
     return res.status(500).json(error);

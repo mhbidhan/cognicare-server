@@ -77,11 +77,11 @@ const patientSchema = new Schema({
     required: true,
     default: [],
   },
-  // routine: {
-  //   type: Schema.Types.ObjectId,
-  //   ref:'Patient-Routine',
-  //   required: false,
-  // },
+  routine: {
+    type: Schema.Types.ObjectId,
+    ref: 'Patient-Routine',
+    required: false,
+  },
 });
 
 const patients = model('Patient', patientSchema);
