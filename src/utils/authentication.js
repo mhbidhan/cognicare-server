@@ -1,10 +1,14 @@
 const jwt = require('jsonwebtoken');
 const { JWT_KEY } = require('../config');
 
-function getAuthToken(userId) {
+function getAuthToken(userId, expiresIn = '24h') {
   return jwt.sign({ userId }, JWT_KEY, {
-    expiresIn: '24h',
+    expiresIn,
   });
+}
+
+function getPermanentAuthToken(userId) {
+  return jwt.sign({ userId }, JWT_KEY);
 }
 
 function verifyAuthToken(token) {
@@ -13,5 +17,6 @@ function verifyAuthToken(token) {
 
 module.exports = {
   getAuthToken,
+  getPermanentAuthToken,
   verifyAuthToken,
 };

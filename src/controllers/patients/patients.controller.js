@@ -1,6 +1,6 @@
 const caretakers = require('../../models/caretakers/caretakers.model');
 const patients = require('../../models/patients/patients.model');
-const { getAuthToken } = require('../../utils/authentication');
+const { getPermanentAuthToken } = require('../../utils/authentication');
 const errorMessages = require('../../utils/error-messages');
 
 async function getAllPatientByCaretaker(req, res) {
@@ -72,7 +72,7 @@ async function createNewPatient(req, res) {
       emergencyContact,
       contacts,
     });
-    const loginCode = getAuthToken(newPaitent._id);
+    const loginCode = getPermanentAuthToken(newPaitent._id);
 
     newPaitent.loginCode = loginCode;
 
