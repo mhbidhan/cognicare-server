@@ -6,6 +6,7 @@ const patientRouter = require('./routers/patients/patients.routes');
 const okayaRouter = require('./routers/okaya/okaya.routes');
 const routineElementsRouter = require('./routers/routine-elements/routine-elements.routes');
 const patientRoutinesRouter = require('./routers/patient-routine/patient-routine.routes');
+const vonageRouter = require('./routers/vonage/vonage.routes');
 
 const app = express();
 
@@ -24,5 +25,6 @@ app.use('/patients', patientRouter);
 app.use('/patientRoutine', patientRoutinesRouter);
 app.use('/routineElement', routineElementsRouter);
 app.use('/okaya', okayaRouter);
+app.use('/vonage', vonageRouter);
 
 module.exports = app;

@@ -2,14 +2,16 @@ const { OKAYA_ADMIN_API_KEY } = require('../../config');
 
 async function okayaCheckin(req, res) {
   try {
-    const { videoId, status } = req.body;
+    const { videoId } = req.body;
     console.log('From Okaya: ', req.body);
 
-    if (status === 'completed') {
+    if (videoId !== '12345') {
       const data = await getCheckInInfo(videoId);
       console.log('Data: ', data);
 
-      res.status(200).json('OK');
+      res.status(200).json({ status: 'OK' });
+    } else {
+      res.status(200).json({ status: 'OK' });
     }
   } catch (error) {
     console.log(error);
