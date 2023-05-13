@@ -57,7 +57,19 @@ async function createNewPatient(req, res) {
   try {
     const { authUser, body } = req;
 
-    const { name, age, imgUrl, emergencyContact, contacts } = body;
+    const {
+      name,
+      age,
+      imgUrl,
+      emergencyContact,
+      contacts,
+      gender,
+      relationship,
+      country,
+      birthCountry,
+      locale,
+      livingArrangement,
+    } = body;
 
     const caretaker = await caretakers.findById(authUser);
 
@@ -71,6 +83,12 @@ async function createNewPatient(req, res) {
       imgUrl,
       emergencyContact,
       contacts,
+      gender,
+      relationship,
+      country,
+      birthCountry,
+      locale,
+      livingArrangement,
     });
     const loginCode = getPermanentAuthToken(newPaitent._id);
 

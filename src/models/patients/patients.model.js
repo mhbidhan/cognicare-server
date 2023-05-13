@@ -18,6 +18,40 @@ const patientSchema = new Schema({
     max: 200,
     required: true,
   },
+  gender: {
+    type: String,
+    enum: ['Male', 'Female', 'Gender Diverse'],
+    required: true,
+    default: 'Gender Diverse',
+  },
+  relationship: {
+    type: String,
+    enum: ['Single', 'Partner', 'Marital'],
+    required: true,
+    default: 'Marital',
+  },
+  country: {
+    type: String,
+    required: true,
+    default: 'Bangladesh',
+  },
+  birthCountry: {
+    type: String,
+    required: true,
+    default: 'Bangladesh',
+  },
+  locale: {
+    type: String,
+    enum: ['Urban', 'Rural'],
+    required: true,
+    default: 'Urban',
+  },
+  livingArrangement: {
+    type: String,
+    enum: ['Renting', 'House Owner', 'Homeless'],
+    required: true,
+    default: 'Renting',
+  },
   imgUrl: {
     type: String,
     min: 3,
