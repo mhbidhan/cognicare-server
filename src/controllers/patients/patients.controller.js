@@ -78,6 +78,8 @@ async function createNewPatient(req, res) {
 
     await newPaitent.save();
 
+    await createSahhaProfile(newPaitent._id);
+
     caretaker.patients.push(newPaitent._id);
 
     caretaker.save();
