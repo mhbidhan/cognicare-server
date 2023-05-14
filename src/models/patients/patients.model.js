@@ -12,6 +12,13 @@ const patientSchema = new Schema({
     max: 255,
     required: true,
   },
+  email: {
+    type: String,
+    min: 3,
+    max: 255,
+    required: true,
+    unique: true,
+  },
   age: {
     type: Number,
     min: 1,
