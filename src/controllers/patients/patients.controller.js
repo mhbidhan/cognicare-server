@@ -112,9 +112,29 @@ async function createNewPatient(req, res) {
   }
 }
 
+async function setOkayaPass(req, res) {
+  try {
+    const { id } = req.params;
+    const { okayaPass } = req.body;
+
+    const patient = await patients.findById(id);
+
+    if (!patient) return res.status(404).json(patient);
+
+    patient.set('okayaPass', okayaPass);
+
+    await patient.save();
+    res.status(200).json(patient);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+}
+
 module.exports = {
   getAllPatientByCaretaker,
   getOwnData,
   getPatientById,
   createNewPatient,
+  setOkayaPass,
 };

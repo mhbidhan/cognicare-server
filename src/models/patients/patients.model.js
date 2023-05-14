@@ -123,6 +123,9 @@ const patientSchema = new Schema({
     ref: 'Patient-Routine',
     required: false,
   },
+  okayaPass: {
+    type: String,
+  },
 });
 
 const patients = model('Patient', patientSchema);
