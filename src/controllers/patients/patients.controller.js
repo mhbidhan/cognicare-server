@@ -2,6 +2,7 @@ const caretakers = require('../../models/caretakers/caretakers.model');
 const patients = require('../../models/patients/patients.model');
 const { getPermanentAuthToken } = require('../../utils/authentication');
 const errorMessages = require('../../utils/error-messages');
+const { createSahhaProfile } = require('../../utils/sahha');
 
 async function getAllPatientByCaretaker(req, res) {
   try {
