@@ -60,6 +60,7 @@ async function createNewPatient(req, res) {
     const {
       name,
       age,
+      email,
       imgUrl,
       emergencyContact,
       contacts,
@@ -80,6 +81,7 @@ async function createNewPatient(req, res) {
       caretaker: authUser,
       name,
       age,
+      email,
       imgUrl,
       emergencyContact,
       contacts,
