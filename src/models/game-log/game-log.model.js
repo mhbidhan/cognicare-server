@@ -18,6 +18,11 @@ const gameLogSchema = new Schema({
     type: {},
     required: false,
   },
+  timestamp: {
+    type: Date,
+    required: true,
+    default: new Date().toISOString(),
+  },
 });
 
 const gameLogs = model('Game-Log', gameLogSchema);
