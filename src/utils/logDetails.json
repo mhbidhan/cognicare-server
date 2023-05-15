@@ -1,0 +1,37 @@
+{
+  "blood": {
+    "dataType": ["BloodGlucose", "BloodPressureDiastolic", "BloodPressureSystolic"],
+    "count": "number",
+    "unit": ["mmHg", "mg/dL"],
+    "source": true,
+    "relationToMeal": true,
+    "manuallyEntered": "boolean",
+    "startDateTime": true,
+    "endDateTime": true
+  },
+  "sleep": {
+    "durationInMinutes": "number",
+    "sleepStage": ["in bed", "asleep", "awake"],
+    "unit": ["mmHg", "mg/dL"],
+    "source": true,
+    "manuallyEntered": true,
+    "startDateTime": true,
+    "endDateTime": true
+  },
+  "movement": {
+    "dataType": ["StepCount", "FloorsDescended", "FloorsAscended", "Pace"],
+    "count": "number",
+    "source": true,
+    "manuallyEntered": "boolean",
+    "startDateTime": true,
+    "endDateTime": true
+  },
+  "heart": {
+    "dataType": ["HeartRate", "RestingHeartRate", "HeartRateVariablity"],
+    "count": "number",
+    "source": true,
+    "manuallyEntered": "boolean",
+    "startDateTime": true,
+    "endDateTime": true
+  }
+}

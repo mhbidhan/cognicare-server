@@ -2,6 +2,7 @@ const caretakers = require('../../models/caretakers/caretakers.model');
 const patients = require('../../models/patients/patients.model');
 const { getPermanentAuthToken } = require('../../utils/authentication');
 const errorMessages = require('../../utils/error-messages');
+const { createSahhaProfile } = require('../../utils/sahha');
 
 async function getAllPatientByCaretaker(req, res) {
   try {
@@ -60,6 +61,7 @@ async function createNewPatient(req, res) {
     const {
       name,
       age,
+      email,
       imgUrl,
       emergencyContact,
       contacts,
@@ -80,6 +82,7 @@ async function createNewPatient(req, res) {
       caretaker: authUser,
       name,
       age,
+      email,
       imgUrl,
       emergencyContact,
       contacts,
@@ -109,9 +112,29 @@ async function createNewPatient(req, res) {
   }
 }
 
+async function setOkayaPass(req, res) {
+  try {
+    const { id } = req.params;
+    const { okayaPass } = req.body;
+
+    const patient = await patients.findById(id);
+
+    if (!patient) return res.status(404).json(patient);
+
+    patient.set('okayaPass', okayaPass);
+
+    await patient.save();
+    res.status(200).json(patient);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+}
+
 module.exports = {
   getAllPatientByCaretaker,
   getOwnData,
   getPatientById,
   createNewPatient,
+  setOkayaPass,
 };
