@@ -10,7 +10,14 @@ async function okayaCheckin(req, res) {
       const data = await getCheckInInfo(videoId);
       console.log('Data: ', data);
 
-      if (data) {
+      if (
+        data &&
+        data.patientID &&
+        data.videoLink &&
+        data.transcript &&
+        data.mood &&
+        data.fatigueScore
+      ) {
         const {
           patientID,
           utcDate,
