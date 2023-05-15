@@ -8,6 +8,7 @@ const routineElementsRouter = require('./routers/routine-elements/routine-elemen
 const patientRoutinesRouter = require('./routers/patient-routine/patient-routine.routes');
 const vonageRouter = require('./routers/vonage/vonage.routes');
 const sahhaRouter = require('./routers/sahha/sahha.routes');
+const routineLogRouter = require('./routers/routine-log/routine-log.routes');
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use('/caretakers', caretakersRouter);
 app.use('/patients', patientRouter);
 app.use('/patientRoutine', patientRoutinesRouter);
 app.use('/routineElement', routineElementsRouter);
+app.use('/routineLogs', routineLogRouter);
 app.use('/okaya', okayaRouter);
 app.use('/vonage', vonageRouter);
 app.use('/sahha', sahhaRouter);
