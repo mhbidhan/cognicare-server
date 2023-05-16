@@ -13,15 +13,35 @@ const routineElementSchema = new Schema({
     required: true,
   },
   startTime: {
-    type: Number,
-    min: 0,
-    max: 23,
+    type: {
+      _id: false,
+      timeInNumber: {
+        type: Number,
+        min: 0,
+        max: 2359,
+      },
+      timeInString: {
+        type: String,
+        min: 3,
+        max: 255,
+      },
+    },
     required: true,
   },
   endTime: {
-    type: Number,
-    min: 0,
-    max: 23,
+    _id: false,
+    type: {
+      timeInNumber: {
+        type: Number,
+        min: 0,
+        max: 2359,
+      },
+      timeInString: {
+        type: String,
+        min: 3,
+        max: 255,
+      },
+    },
     required: true,
   },
   medicine: {
