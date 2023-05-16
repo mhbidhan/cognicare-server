@@ -25,7 +25,8 @@ async function createNewRoutineElement(req, res) {
         .status(400)
         .json(activityType + ' is required to create a routine element');
 
-    if (startTime > endTime) return res.status(400).json('Time is invalid');
+    if (startTime.timeInNumber > endTime.timeInNumber)
+      return res.status(400).json('Time is invalid');
 
     const routineElement = await routineElements.create({
       name,
