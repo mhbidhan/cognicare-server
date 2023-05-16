@@ -3,7 +3,7 @@ const errorMessages = require('../../utils/error-messages');
 
 async function getAllGameLogs(req, res) {
   try {
-    const { patientId, routineElementId, date } = req.query;
+    const { patientId, routineElementId, from, to } = req.query;
 
     if (!patientId && !routineElementId)
       return res.status(400).json(errorMessages.badRequest);
@@ -13,15 +13,24 @@ async function getAllGameLogs(req, res) {
     if (patientId) query = 'patientId';
     if (routineElementId) query = 'routineElementId';
 
-    const searchParams = {};
-    searchParams[query] = { _id: req.query[query] };
+    if (!query) return res.status(400).json(errorMessages.badRequest);
 
-    if (date) {
-      const dateStart = new Date(date).setHours(0, 0, 0, 0);
-      const dateEnd = new Date(date).setHours(23, 59, 59, 100);
+    const date = new Date();
 
-      searchParams.timestamp = { $gte: dateStart, $lte: dateEnd };
+    let dateStart = new Date(date).setHours(0, 0, 0, 0);
+    let dateEnd = new Date(date).setHours(23, 59, 59, 100);
+
+    if (from) {
+      dateStart = new Date(from).setHours(0, 0, 0, 0);
+      if (to) {
+        dateEnd = new Date(to).setHours(23, 59, 59, 100);
+      } else {
+        dateEnd = new Date(date).setHours(23, 59, 59, 100);
+      }
     }
+
+    const searchParams = { timestamp: { $gte: dateStart, $lte: dateEnd } };
+    searchParams[query] = { _id: req.query[query] };
 
     const allGameLogs = await gameLogs.find(searchParams);
 

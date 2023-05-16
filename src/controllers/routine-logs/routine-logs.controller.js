@@ -3,7 +3,7 @@ const errorMessages = require('../../utils/error-messages');
 
 async function getAllRoutineLogs(req, res) {
   try {
-    const { routineId, routineElementId, date = new Date() } = req.query;
+    const { routineId, routineElementId, from, to } = req.query;
 
     let query;
 
@@ -12,15 +12,22 @@ async function getAllRoutineLogs(req, res) {
 
     if (!query) return res.status(400).json(errorMessages.badRequest);
 
-    const searchParams = {};
-    searchParams[query] = { _id: req.query[query] };
+    const date = new Date();
 
-    if (date) {
-      const dateStart = new Date(date).setHours(0, 0, 0, 0);
-      const dateEnd = new Date(date).setHours(23, 59, 59, 100);
+    let dateStart = new Date(date).setHours(0, 0, 0, 0);
+    let dateEnd = new Date(date).setHours(23, 59, 59, 100);
 
-      searchParams.timestamp = { $gte: dateStart, $lte: dateEnd };
+    if (from) {
+      dateStart = new Date(from).setHours(0, 0, 0, 0);
+      if (to) {
+        dateEnd = new Date(to).setHours(23, 59, 59, 100);
+      } else {
+        dateEnd = new Date(date).setHours(23, 59, 59, 100);
+      }
     }
+
+    const searchParams = { timestamp: { $gte: dateStart, $lte: dateEnd } };
+    searchParams[query] = { _id: req.query[query] };
 
     const allRoutineLogs = await routineLogs.find(searchParams);
 
