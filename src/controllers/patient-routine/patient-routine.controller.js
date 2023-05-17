@@ -4,7 +4,7 @@ const errorMessages = require('../../utils/error-messages');
 
 async function getAllRoutineForPatient(req, res) {
   try {
-    const patientId = req.headers['patient-id'];
+    const { patientId } = req;
 
     if (!patientId) return res.status(400).json('patient id required');
 
@@ -27,6 +27,7 @@ async function getAllRoutineForPatient(req, res) {
 }
 
 async function createNewPatientRoutine(req, res) {
+  console.log('new routine', req.body);
   try {
     const { routineType, patient, date, routineElements } = req.body;
 
