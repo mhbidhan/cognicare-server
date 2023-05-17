@@ -54,6 +54,21 @@ async function getPatientById(req, res) {
   }
 }
 
+async function getPatientContacts(req, res) {
+  try {
+    const { id } = req.params;
+
+    const patient = await patients.findById(id);
+
+    if (!patient) return res.status(404).json(patient);
+
+    res.status(200).json(patient.contacts);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+}
+
 async function createNewPatient(req, res) {
   try {
     const { authUser, body } = req;
@@ -158,4 +173,5 @@ module.exports = {
   createNewPatient,
   setOkayaPass,
   addContact,
+  getPatientContacts,
 };
