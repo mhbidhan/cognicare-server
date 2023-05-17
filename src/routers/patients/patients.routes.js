@@ -5,6 +5,7 @@ const {
   getPatientById,
   createNewPatient,
   setOkayaPass,
+  addContact,
 } = require('../../controllers/patients/patients.controller');
 const authentication = require('../../middlewares/authentication.middleware');
 
@@ -15,5 +16,6 @@ patientRouter.get('/own/', authentication, getOwnData);
 patientRouter.get('/:id', getPatientById);
 patientRouter.post('/', authentication, createNewPatient);
 patientRouter.put('/:id/setokayapass', authentication, setOkayaPass);
+patientRouter.put('/:id/addcontact', authentication, addContact);
 
 module.exports = patientRouter;
