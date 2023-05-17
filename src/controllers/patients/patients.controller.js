@@ -54,6 +54,21 @@ async function getPatientById(req, res) {
   }
 }
 
+async function getPatientContacts(req, res) {
+  try {
+    const { id } = req.params;
+
+    const patient = await patients.findById(id);
+
+    if (!patient) return res.status(404).json(patient);
+
+    res.status(200).json(patient.contacts);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+}
+
 async function createNewPatient(req, res) {
   try {
     const { authUser, body } = req;
@@ -131,10 +146,32 @@ async function setOkayaPass(req, res) {
   }
 }
 
+async function addContact(req, res) {
+  try {
+    const { id } = req.params;
+    const { body } = req;
+
+    const { name, phone, relation } = body;
+
+    const patient = await patients.findById(id);
+    if (!patient) return res.status(404).json(patient);
+
+    patient.contacts.push({ name, phone, relation });
+
+    await patient.save();
+    res.status(200).json(patient);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+}
+
 module.exports = {
   getAllPatientByCaretaker,
   getOwnData,
   getPatientById,
   createNewPatient,
   setOkayaPass,
+  addContact,
+  getPatientContacts,
 };
