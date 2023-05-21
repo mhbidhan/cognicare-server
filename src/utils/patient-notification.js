@@ -20,6 +20,7 @@ async function sendTaskNotificationToPatient(connectedUsers, io) {
       .map((routine) =>
         routine.routineElements.map((routineElement) => {
           routineElement.patient = routine.patient;
+          routineElement.routineId = routine._id;
 
           return routineElement;
         })
@@ -37,6 +38,7 @@ async function sendTaskNotificationToPatient(connectedUsers, io) {
           time,
           message: routineElement.name,
           details: routineElement,
+          routineId: routineElement.routineId,
         });
       }
     }
