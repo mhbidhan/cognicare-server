@@ -53,6 +53,40 @@ async function getRoutineLogsById(req, res) {
   }
 }
 
+async function getRoutineLogsByRoutineId(req, res) {
+  try {
+    const { id } = req.params;
+
+    const routineLog = await routineLogs.find({
+      routineId: { _id: id },
+    });
+
+    if (!routineLog) return res.status(404).json(errorMessages.notFound);
+
+    return res.status(200).json(routineLog);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+}
+
+async function getRoutineLogsByRoutineElementId(req, res) {
+  try {
+    const { id } = req.params;
+
+    const routineLog = await routineLogs.find({
+      routineElementId: { _id: id },
+    });
+
+    if (!routineLog) return res.status(404).json(errorMessages.notFound);
+
+    return res.status(200).json(routineLog);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+}
+
 async function createNewRoutineLog(req, res) {
   try {
     const { routineId, routineElementId, status } = req.body;
@@ -77,4 +111,6 @@ module.exports = {
   getAllRoutineLogs,
   getRoutineLogsById,
   createNewRoutineLog,
+  getRoutineLogsByRoutineId,
+  getRoutineLogsByRoutineElementId,
 };

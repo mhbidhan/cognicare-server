@@ -151,12 +151,12 @@ async function addContact(req, res) {
     const { id } = req.params;
     const { body } = req;
 
-    const { name, phone, relation } = body;
+    const { name, phone, relation, imgUrl } = body;
 
     const patient = await patients.findById(id);
     if (!patient) return res.status(404).json(patient);
 
-    patient.contacts.push({ name, phone, relation });
+    patient.contacts.push({ name, phone, relation, imgUrl });
 
     await patient.save();
     res.status(200).json(patient);

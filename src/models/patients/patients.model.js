@@ -113,6 +113,11 @@ const patientSchema = new Schema({
           max: 255,
           required: true,
         },
+        imgUrl: {
+          type: String,
+          min: 3,
+          max: 255,
+        },
       },
     ],
     required: true,

@@ -4,7 +4,7 @@ const errorMessages = require('../../utils/error-messages');
 
 async function getAllRoutineForPatient(req, res) {
   try {
-    const patientId = req.headers['patient-id'];
+    const { patientId } = req;
 
     if (!patientId) return res.status(400).json('patient id required');
 
@@ -22,11 +22,12 @@ async function getAllRoutineForPatient(req, res) {
     res.status(200).json(routine);
   } catch (error) {
     console.log(error);
-    res.status(500).json(error);
+    res.status(500).send(JSON.stringify(error));
   }
 }
 
 async function createNewPatientRoutine(req, res) {
+  console.log('new routine', req.body);
   try {
     const { routineType, patient, date, routineElements } = req.body;
 
@@ -35,6 +36,11 @@ async function createNewPatientRoutine(req, res) {
 
     if (!routineElements.length)
       return res.status(400).json('Atleast one routine element is required');
+
+    const foundOne = await patientRoutines.findOne({ patient });
+
+    if (foundOne)
+      return res.status(400).json('A routine already exists for this patient');
 
     const routine = await patientRoutines.create({
       routineType,
