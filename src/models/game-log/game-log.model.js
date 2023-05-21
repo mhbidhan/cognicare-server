@@ -3,11 +3,11 @@ const { Schema, model } = require('mongoose');
 const gameLogSchema = new Schema({
   patientId: {
     type: Schema.Types.ObjectId,
-    required: true,
+    required: false,
   },
   routineElementId: {
     type: Schema.Types.ObjectId,
-    required: true,
+    required: false,
   },
   status: {
     type: String,
