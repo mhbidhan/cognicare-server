@@ -12,7 +12,7 @@ module.exports = {
   VONAGE_API_KEY: process.env.VONAGE_API_KEY,
   VONAGE_API_SECRET: process.env.VONAGE_API_SECRET,
   VONAGE_APP_ID: process.env.VONAGE_APP_ID,
-  VONAGE_PRIVATE_KEY_PATH: './keys/private.key',
   SAHHA_CLIENT_ID: process.env.SAHHA_CLIENT_ID,
   SAHHA_CLIENT_SECRET: process.env.SAHHA_CLIENT_SECRET,
+  VONAGE_PRIVATE_KEY: process.env.VONAGE_PRIVATE_KEY,
 };
