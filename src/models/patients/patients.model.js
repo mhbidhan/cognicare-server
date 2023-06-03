@@ -33,7 +33,7 @@ const patientSchema = new Schema({
   },
   relationship: {
     type: String,
-    enum: ['Single', 'Partner', 'Marital'],
+    enum: ['Single', 'Partner', 'Marital', 'Widowed', 'Married', 'Divorced'],
     required: true,
     default: 'Marital',
   },
@@ -89,6 +89,11 @@ const patientSchema = new Schema({
       min: 3,
       max: 255,
       required: true,
+    },
+    imgUrl: {
+      type: String,
+      min: 3,
+      max: 255,
     },
   },
   contacts: {

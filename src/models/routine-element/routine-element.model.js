@@ -9,7 +9,7 @@ const routineElementSchema = new Schema({
   },
   activityType: {
     type: String,
-    enum: ['meal', 'medicine', 'exercise', 'contact', 'game'],
+    enum: ['meal', 'medicine', 'exercise', 'contact', 'game', 'general'],
     required: true,
   },
   startTime: {
@@ -183,6 +183,23 @@ const routineElementSchema = new Schema({
       },
     },
     required: () => (this.activityType === 'game' ? true : false),
+  },
+  general: {
+    type: {
+      name: {
+        type: String,
+        min: 3,
+        max: 255,
+        required: true,
+      },
+      description: {
+        type: String,
+        min: 3,
+        max: 255,
+        required: true,
+      },
+    },
+    required: () => (this.activityType === 'general' ? true : false),
   },
 });
 
