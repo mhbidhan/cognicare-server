@@ -55,7 +55,7 @@ const patientSchema = new Schema({
   },
   livingArrangement: {
     type: String,
-    enum: ['Renting', 'House Owner', 'Homeless'],
+    enum: ['Renting', 'House Owner', 'Homeless', 'Own house', 'Senior home'],
     required: true,
     default: 'Renting',
   },
